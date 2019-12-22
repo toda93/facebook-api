@@ -1,7 +1,6 @@
 import querystring from 'querystring';
-import moment from 'moment';
-
 import HttpClient from 'toda-http-client';
+
 import {ErrorException} from './ErrorException';
 
 const OAUTH_ENDPOINT = 'https://www.facebook.com/v3.2/dialog/oauth';
@@ -44,7 +43,7 @@ class FacebookOAuth2API {
             redirect_uri: this.redirect_uri,
         });
         if (json.expires_in) {
-            json.expired = moment().unix() + (json.expires_in - 500);
+            json.expired = Math.round((new Date()).getTime() / 1000) + (json.expires_in - 500);
 
             this.token = json;
             return this.token;

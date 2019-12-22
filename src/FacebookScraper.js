@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 import HttpClient from 'toda-http-client';
 
 class FacebookScraper {
@@ -24,12 +22,8 @@ class FacebookScraper {
         }
     }
 
-    async sendInboxMessage(fb_id, message, time_now = false) {
+    async sendInboxMessage(fb_id, message) {
         const url = 'https://m.facebook.com/messages/read/?tid=' + fb_id;
-        if (time_now) {
-            const time = moment().format('HH:mm:ss');
-            message = `[${time}] ${message}`;
-        }
 
         let html = await this.client.get(url);
 

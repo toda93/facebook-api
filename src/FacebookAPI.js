@@ -1,8 +1,8 @@
+import crypto from 'crypto';
 import querystring from 'querystring';
-
 import HttpClient from 'toda-http-client';
+
 import FacebookOAuth2API from './FacebookOAuth2API';
-import crypto from "crypto";
 
 const END_POINT = 'https://graph.facebook.com/v3.2';
 
@@ -111,7 +111,7 @@ class FacebookAPI extends FacebookOAuth2API {
         });
 
         sig += '62f8ce9f74b12f84c123cc23437a4a32'; //Android API_SECRET
-        data.sig =  crypto.createHash('md5').update(sig.toString()).digest('hex');
+        data.sig = crypto.createHash('md5').update(sig.toString()).digest('hex');
 
         const client = new HttpClient();
         return client.get('https://api.facebook.com/restserver.php?' + querystring.stringify(data));
