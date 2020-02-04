@@ -1,6 +1,6 @@
 {
-  "name": "toda-facebook-api",
-  "version": "1.0.4",
+  "name": "@azteam/api",
+  "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
   "repository": {
