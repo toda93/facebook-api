@@ -1,7 +1,7 @@
 import querystring from 'querystring';
-import HttpClient from 'toda-http-client';
+import HttpClient from '@azteam/http-client';
 
-import {ErrorException} from 'toda-error';
+import {ErrorException} from '@azteam/error';
 
 const OAUTH_ENDPOINT = 'https://www.facebook.com/v3.2/dialog/oauth';
 const OAUTH_TOKEN_ENDPOINT = 'https://graph.facebook.com/v3.2/oauth/access_token';

@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import querystring from 'querystring';
-import HttpClient from 'toda-http-client';
+import HttpClient from '@azteam/http-client';
 
 import FacebookOAuth2API from './FacebookOAuth2API';
 

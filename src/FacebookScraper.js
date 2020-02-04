@@ -1,4 +1,4 @@
-import HttpClient from 'toda-http-client';
+import HttpClient from '@azteam/http-client';
 
 class FacebookScraper {
 
