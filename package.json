@@ -1,54 +1,54 @@
 {
-  "name": "@azteam/api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "lib/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/toda93/facebook-api.git"
-  },
-  "engines": {
-    "node": ">= 10.0.0",
-    "npm": "^6.0.0"
-  },
-  "keywords": [
-    "toda",
-    "nodejs",
-    "facebook api",
-    "facebook scaper"
-  ],
-  "author": "toda <sp.azsolution.net@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/toda93/facebook-api/issues"
-  },
-  "homepage": "https://github.com/toda93/facebook-api#readme",
-  "dependencies": {
-    "toda-error": "^1.1.2",
-    "toda-http-client": "^1.0.7"
-  },
-  "devDependencies": {
-    "@babel/runtime": "^7.7.5",
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/plugin-transform-async-to-generator": "^7.7.4",
-    "@babel/preset-env": "^7.7.6"
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ]
-  },
-  "scripts": {
-    "pretest": "babel src --out-dir lib",
-    "test": "node lib/test.js",
-    "prepublish": "babel src --out-dir lib"
-  }
+    "name": "@azteam/facebook-api",
+    "version": "1.0.1",
+    "description": "",
+    "main": "lib/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/toda93/facebook-api.git"
+    },
+    "engines": {
+        "node": ">= 10.0.0",
+        "npm": "^6.0.0"
+    },
+    "keywords": [
+        "toda",
+        "nodejs",
+        "facebook api",
+        "facebook scaper"
+    ],
+    "author": "toda <sp.azsolution.net@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/toda93/facebook-api/issues"
+    },
+    "homepage": "https://github.com/toda93/facebook-api#readme",
+    "dependencies": {
+        "@azteam/error": "^1.0.0",
+        "@azteam/http-client": "^1.0.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.7.5",
+        "@babel/core": "^7.7.5",
+        "@babel/plugin-transform-async-to-generator": "^7.7.4",
+        "@babel/preset-env": "^7.7.6",
+        "@babel/runtime": "^7.7.5"
+    },
+    "babel": {
+        "presets": [
+            [
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]
+        ]
+    },
+    "scripts": {
+        "pretest": "babel src --out-dir lib",
+        "test": "node lib/test.js",
+        "prepublish": "babel src --out-dir lib"
+    }
 }
