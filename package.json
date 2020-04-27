@@ -1,6 +1,6 @@
 {
     "name": "@azteam/facebook-api",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "",
     "main": "src/index.js",
     "repository": {
@@ -25,6 +25,6 @@
     "homepage": "https://github.com/toda93/facebook-api#readme",
     "dependencies": {
         "@azteam/error": "1.0.8",
-        "@azteam/http-client": "1.0.26"
+        "@azteam/http-client": "1.0.27"
     }
 }
