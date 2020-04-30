@@ -10,7 +10,7 @@ class FacebookAPI extends FacebookOAuth2API {
 
     async getMyInfo() {
         const client = this._getClient();
-        const info = await client.responseJSON().get(`${END_POINT}/me?fields=id,name,email`);
+        const info = await client.get(`${END_POINT}/me?fields=id,name,email`);
         return {
             ...info,
             picture: `http://graph.facebook.com/${info.id}/picture?type=normal`
