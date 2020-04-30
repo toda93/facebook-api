@@ -114,7 +114,7 @@ class FacebookAPI extends FacebookOAuth2API {
         data.sig = crypto.createHash('md5').update(sig.toString()).digest('hex');
 
         const client = new HttpClient();
-        return client.get('https://api.facebook.com/restserver.php?' + querystring.stringify(data));
+        return client.get('https://api.facebook.com/restserver.php', data);
     }
 
     static createButtonPostBack(title, payload) {
