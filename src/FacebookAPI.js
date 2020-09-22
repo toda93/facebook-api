@@ -1,158 +1,37 @@
-import crypto from 'crypto';
-import querystring from 'querystring';
 import HttpClient from '@azteam/http-client';
 
-import FacebookOAuth2API from './FacebookOAuth2API';
 
-const END_POINT = 'https://graph.facebook.com/v3.2';
+const END_POINT = 'https://graph.facebook.com';
 
-class FacebookAPI extends FacebookOAuth2API {
-
-    async getMyInfo() {
-        const client = this._getClient();
-        const info = await client.get(`${END_POINT}/me?fields=id,name,email`);
-        return {
-            ...info,
-            picture: `http://graph.facebook.com/${info.id}/picture?type=normal`
-        }
+class FacebookAPI {
+    constructor(appId, appSecret) {
+        this.client = new HttpClient();
+        this.appId = appId;
+        this.appSecret = appSecret;
     }
 
-    sendPageSettingMenu(buttons) {
-        const client = this._getClient();
-        return client.post(`${END_POINT}/me/messenger_profile`, {
-            get_started: {
-                payload: 'GET_STARTED',
-
-            },
-            persistent_menu: [
-                {
-                    locale: 'default',
-                    call_to_actions: buttons
-                }
-            ]
+    async checkTokenInApp(token) {
+        const res = await this.client.get(`${END_POINT}/debug_token`, {
+            input_token: token,
+            access_token: `${this.appId}|${this.appSecret}`
         });
+        return !!(res && res.data && res.data.is_valid);
     }
 
-    sendPageMessage(sender, msg) {
-        const client = this._getClient();
-        return client.post(`${END_POINT}/me/messages`, {
-            recipient: {
-                id: sender
-            },
-            message: {
-                text: msg
-            },
+    async getProfile(token) {
+        const res = await this.client.get(`${END_POINT}/me`, {
+            fields: 'id,name,email',
+            access_token: token
         });
-    }
-
-    sendPageMessageWithButtons(sender, msg, buttons) {
-        const client = this._getClient();
-        return client.post(`${END_POINT}/me/messages`, {
-            recipient: {
-                id: sender
-            },
-            message: {
-                attachment: {
-                    type: 'template',
-                    payload: {
-                        template_type: 'button',
-                        text: msg,
-                        buttons: buttons
-                    }
-                },
-                text: msg
-            },
-        });
-    }
-
-    postPhoto(message, url) {
-        const client = this._getClient();
-        return client.post(`${END_POINT}/me/photos`, {
-            message,
-            url
-        });
-    }
-
-    postFeed(message, link = null) {
-
-        const data = {
-            message
-        };
-
-        if (link) {
-            data.link = link;
-        }
-        const client = this._getClient();
-        return client.post(`${END_POINT}/me/feed`, data);
-    }
-
-    sharePost(id, message = '') {
-        const link = `https://www.facebook.com/${id}`;
-        return this.postFeed(message, link);
-    }
-
-
-    static getTokenAndroid(email, password) {
-        let data = {
-            api_key: '882a8490361da98702bf97a021ddc14d', //Android API_KEY
-            email: email,
-            format: 'JSON',
-            locale: 'vi_vn',
-            method: 'auth.login',
-            password: password,
-            return_ssl_resources: '0',
-            v: '1.0'
-        };
-
-        let sig = '';
-
-        data.map((value, key) => {
-            sig += `${key}=${value}`;
-        });
-
-        sig += '62f8ce9f74b12f84c123cc23437a4a32'; //Android API_SECRET
-        data.sig = crypto.createHash('md5').update(sig.toString()).digest('hex');
-
-        const client = new HttpClient();
-        return client.get('https://api.facebook.com/restserver.php', data);
-    }
-
-    static createButtonPostBack(title, payload) {
-        return {
-            title,
-            payload,
-            type: 'postback'
-        }
-    }
-
-    static createButtonUrl(title, url, webview_height_ratio = 'FULL') {
-        return {
-            title,
-            url,
-            webview_height_ratio,
-            type: 'web_url',
-        }
-    }
-
-    static createButtonCall(title, payload) {
-        return {
-            title,
-            payload,
-            type: 'phone_number',
-        }
-    }
-
-
-    _getClient() {
-        console.log(`${this.token.token_type} ${this.token.access_token}`);
-
-        return new HttpClient({
-            headers: {
-                'Authorization': `Bearer ${this.token.access_token}`
+        if (res && res.id) {
+            return {
+                ...res,
+                avatar: `${END_POINT}/${res.id}/picture?type=large`
             }
-        });
-
+        }
+        return null;
     }
+
 }
 
 export default FacebookAPI;
