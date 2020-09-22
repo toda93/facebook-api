@@ -1,7 +1,7 @@
-import FacebookAPI from './FacebookAPI';
-import FacebookScraper from './FacebookScraper';
+import FacebookAuthClient from './FacebookAuthClient';
+// import FacebookScraper from './FacebookScraper';
 
 export {
-    FacebookAPI,
-    FacebookScraper
+    FacebookAuthClient,
+    // FacebookScraper
 }
