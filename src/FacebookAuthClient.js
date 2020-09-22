@@ -19,7 +19,7 @@ class FacebookAPI {
     }
 
     async getProfileInApp(token) {
-        if (await fbClient.checkTokenInApp(token)) {
+        if (await this._checkTokenInApp(token)) {
             const res = await this.client.get(`${END_POINT}/me`, {
                 fields: 'id,name,email',
                 access_token: token
